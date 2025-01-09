@@ -10,7 +10,7 @@ APLIKASI YANG DI KEMBANGKAN OLEH KSOFT UNTUK ABSENSI SISWA SEKOLAH YANG SUDAH TE
 To deploy this project run
 
 ```bash
-  git clone gh repo clone ahmadrifai8721/ePresensi
+  git clone gh repo clone https://github.com/ahmadrifai8721/ePresensi.git
 ```
 
 ```bash
