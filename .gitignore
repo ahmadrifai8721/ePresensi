@@ -21,3 +21,5 @@ id_rsa
 id_rsa.pub
 22122023.sql
 ePresensi.zip
+/ePresensi.zip
+/php artisan clear-compiled.txt
