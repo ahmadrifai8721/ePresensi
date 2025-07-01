@@ -8,6 +8,8 @@ use App\Models\Role;
 use App\Models\Siswa;
 use App\Models\User;
 use App\Models\UserRole;
+use Dotenv\Util\Str;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class CreateUsers extends Component
@@ -52,7 +54,18 @@ class CreateUsers extends Component
                 "role_id" => $role
             ]);
 
-            $this->success = "User Untuk $nama Telah Dibuat";
+            $this->dispatchBrowserEvent(
+                'swal',
+                [
+                    "title" => "User Untuk $nama Telah Dibuat",
+                    "icon" => "success",
+                    "timer" => 3000,
+                    "animation" => true,
+                    "toast" => true,
+                    "position" => 'top-end',
+                    "showConfirmButton" => false,
+                ]
+            );
             $this->cari = "";
             $this->Users = Dapo_Pengguna::all();
         } else {
@@ -76,7 +89,15 @@ class CreateUsers extends Component
                 "role_id" => $role
             ]);
 
-            $this->success = "User Untuk $nama Telah Dibuat dengan Password sama dengan DAPODIK";
+            $this->dispatchBrowserEvent('swal', [
+                "title" => "User Untuk $nama Telah Dibuat dengan Password sama dengan DAPODIK",
+                "icon" => "success",
+                "timer" => 3000,
+                "animation" => true,
+                "toast" => true,
+                "position" => 'top-end',
+                "showConfirmButton" => false,
+            ]);
             $this->cari = "";
             $this->Users = Dapo_Pengguna::all();
         }
@@ -94,6 +115,7 @@ class CreateUsers extends Component
             foreach ($dataPengguna as $key => $value) {
                 $create_user = User::updateOrCreate([
                     "name" => $value->Guru->nama,
+                    "dapo_id" => $value->ptk_id,
                     "email" => $value->username,
                     "password" => $value->password,
                 ]);
@@ -108,10 +130,26 @@ class CreateUsers extends Component
                     "user_id" => $create_user->id,
                     "role_id" => $role
                 ]);
-                $this->success = "User Untuk " . $value->Guru->nama . " Telah Dibuat dengan password smkislam1";
+                $this->dispatchBrowserEvent('swal', [
+                    "title" => "User Untuk " . $value->Guru->nama . " Telah Dibuat",
+                    "icon" => "success",
+                    "timer" => 3000,
+                    "animation" => true,
+                    "toast" => true,
+                    "position" => 'top-end',
+                    "showConfirmButton" => false,
+                ]);
                 $i++;
             }
-            $this->success = "$i User Untuk PTK Telah Dibuat";
+            $this->dispatchBrowserEvent('swal', [
+                "title" => "$i User Untuk PTK Telah Dibuat",
+                "icon" => "success",
+                "timer" => 3000,
+                "animation" => true,
+                "toast" => true,
+                "position" => 'top-end',
+                "showConfirmButton" => false,
+            ]);
             $this->cari = "";
             $this->Users = Dapo_Pengguna::all();
         }
@@ -120,14 +158,17 @@ class CreateUsers extends Component
         if ($type == "pd") {
 
 
-            $dataPengguna = Dapo_Pengguna::Where("peran_id_str", "Peserta Didik")->get();
+            $dataPengguna = Siswa::all();
             // dd($dataPengguna);
             $i = 0;
             foreach ($dataPengguna as $key => $value) {
                 $create_user = User::updateOrCreate([
-                    "name" => $value->Siswa->name,
-                    "email" => $value->username,
-                    "password" => $value->password,
+                    "email" => $value->nisn . "@" . env("DAPODIK_SERVER_NPSN") . ".epr",
+                ], [
+                    "name" => $value->name,
+                    "dapo_id" => $value->peserta_didik_id,
+                    "email" => $value->nisn . "@" . env("DAPODIK_SERVER_NPSN") . ".epr",
+                    "password" => bcrypt($value->nisn),
                 ]);
 
                 Siswa::where("peserta_didik_id", $value->peserta_didik_id)->update([
@@ -143,7 +184,15 @@ class CreateUsers extends Component
                 // $this->success = "User Untuk " . $value->Siswa->name . " Telah Dibuat";
                 $i++;
             }
-            $this->success = "$i User Untuk Peserta Didik Telah Dibuat";
+            $this->dispatchBrowserEvent('swal', [
+                "title" => "$i User Untuk Peserta Didik Telah Dibuat",
+                "icon" => "success",
+                "timer" => 3000,
+                "animation" => true,
+                "toast" => true,
+                "position" => 'top-end',
+                "showConfirmButton" => false,
+            ]);
             $this->cari = "";
             $this->Users = Dapo_Pengguna::all();
         }
@@ -166,17 +215,25 @@ class CreateUsers extends Component
     {
 
 
-        UserRole::truncate();
-        User::truncate();
+        UserRole::whereNot("user_id",  Auth::user()->id)->delete();
 
-        Siswa::query()->update([
+        Siswa::whereNot("user_id", Auth::user()->id)->update([
             "user_id" => null
         ]);
-        Guru::query()->update([
+        Guru::whereNot("user_id", Auth::user()->id)->update([
             "user_id" => null
         ]);
+        User::whereNot("id", Auth::user()->id)->delete();
 
-        $this->success = "Data User Berhasil Di Kosongkan";
+        $this->dispatchBrowserEvent('swal', [
+            "title" => "Data User Berhasil Di Kosongkan",
+            "icon" => "success",
+            "timer" => 3000,
+            "animation" => true,
+            "toast" => true,
+            "position" => 'top-end',
+            "showConfirmButton" => false,
+        ]);
         $this->Users = Dapo_Pengguna::all();
     }
 }

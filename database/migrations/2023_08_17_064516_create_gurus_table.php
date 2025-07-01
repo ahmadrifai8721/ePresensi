@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("ptk_id");
             $table->string("nama");
-            $table->foreignId("user_id")->nullable()->constrained()->nullOnDelete();
+            $table->foreignId("user_id")->nullable()->constrained()->nullOnDelete()->nullOnDelete();
             $table->timestamps();
         });
     }

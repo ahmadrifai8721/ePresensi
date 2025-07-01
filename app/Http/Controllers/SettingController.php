@@ -56,6 +56,7 @@ class SettingController extends Controller
     public function update(Request $request, Setting $setting)
     {
         //
+        dd($request->input());
         $setting->update($request->input());
 
         return back()->with("success", "Data Sekolah Berhasil di Update");
@@ -76,6 +77,10 @@ class SettingController extends Controller
             if (!is_null($value)) {
                 $dataUpdate[$key] = $value;
             }
+        }
+        if (array_key_exists("password", $dataUpdate)) {
+            # code...
+            $dataUpdate["password"] = bcrypt($dataUpdate["password"]);
         }
         // return $dataUpdate;
 

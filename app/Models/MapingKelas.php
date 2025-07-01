@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -24,8 +25,8 @@ class MapingKelas extends Model
         return $this->hasOne(Siswa::class, "peserta_didik_id", "peserta_didik_id");
     }
 
-    function Kelas(): HasOne
+    function Kelas(): BelongsTo
     {
-        return $this->hasOne(kelas::class, "rombongan_belajar_id", "rombongan_belajar_id");
+        return $this->belongsTo(kelas::class, "rombongan_belajar_id", "rombongan_belajar_id");
     }
 }

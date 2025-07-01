@@ -5,6 +5,7 @@ use App\Http\Controllers\Dapo;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\MobileAccessController;
 use App\Http\Controllers\pembelajaranController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\rekapCetakController;
@@ -51,7 +52,7 @@ Route::get('logout', function (Request $request) {
 
     return redirect('/');
 })->name("logout")->middleware("auth");
-Route::resource('/', PresensiController::class)->names("home")->middleware("Absen");
+Route::resource('/', PresensiController::class)->names("home")->middleware(["Absen", "auth"]);
 Route::prefix('admin')->middleware("auth")->group(function () {
     Route::get("/", [Dashboard::class, 'index'])->name("dashboard");
 
@@ -65,6 +66,12 @@ Route::prefix('admin')->middleware("auth")->group(function () {
         return view("admin.pembelajaran.pembelajaran", ['pembelajaran' => Pembelajaran::where("kelas_id", $Kelas->id)->get(), "pageTitle" => "Daftar Pembelajaran kelas $Kelas->kelas"]);
         // return view("admin.kelas.kelasTambahsiswa", ['kelas' => $Kelas, "siswa" => Siswa::all(), "pageTitle" => "Edit Daftar Siswa kelas $Kelas->kelas"]);
     })->name("kelas.pembelajaran");
+    Route::post("/kelas/tambahKelas", function () {
+        $data = request()->input();
+        $data['rombongan_belajar_id'] = $data['kelas'];
+        kelas::create($data);
+        return redirect()->route("kelas.index")->with("success", "Kelas berhasil ditambahkan");
+    })->name("kelas.tambahKelas");
 
     Route::prefix("/Rekap")->group(function () {
         Route::resource('/Siswa', rekapSiswaController::class)->names("rekapSiswa");
@@ -77,6 +84,7 @@ Route::prefix('admin')->middleware("auth")->group(function () {
     Route::resource("/siswa", SiswaController::class);
     Route::resource("/guru", GuruController::class);
     Route::resource("/Users", UsersController::class);
+    Route::resource("MobileAccess", MobileAccessController::class);
     Route::resource('/Dapodik', Dapo::class);
     Route::prefix("settings")->group(function () {
         Route::resource("setting", SettingController::class);
@@ -90,6 +98,7 @@ Route::prefix("install")->group(function () {
     route::get("/", function () {
         return view("install/register");
     })->name("install")->middleware("Install");
+
     route::get("/Setup", function () {
         $url = "http://" . env("DAPODIK_SERVER_IP") . ":" . env("DAPODIK_SERVER_PORT") .
             "/WebService/getSekolah?npsn=" .

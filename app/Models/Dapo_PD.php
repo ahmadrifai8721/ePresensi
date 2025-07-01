@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Dapo_PD extends Model
@@ -21,6 +23,10 @@ class Dapo_PD extends Model
         return $this->hasOne(Dapo_Rombel::class, "rombongan_belajar_id", "rombongan_belajar_id");
     }
 
+    public function Dapo_Pengguna(): HasMany
+    {
+        return $this->HasMany(Dapo_Pengguna::class, "peserta_didik_id", "peserta_didik_id");
+    }
     public function Siswa(): HasOne
     {
         return $this->hasOne(Siswa::class, "peserta_didik_id", "peserta_didik_id");
@@ -28,6 +34,10 @@ class Dapo_PD extends Model
 
     function Kelas(): HasOne
     {
-        return $this->hasOne(kelas::class, "rombongan_belajar_id", "rombongan_belajar_id");
+        return $this->hasOne(Kelas::class, "rombongan_belajar_id", "rombongan_belajar_id");
+    }
+    public function User(): BelongsTo
+    {
+        return $this->BelongsTo(User::class, "dapo_id", "peserta_didik_id");
     }
 }

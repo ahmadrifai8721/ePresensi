@@ -33,4 +33,8 @@ class presensiGuru extends Model
     {
         return $this->hasMany(presensiSiswaMapel::class, 'presensi_guru_id', 'id');
     }
+    public function presensiLocate(): HasMany
+    {
+        return $this->hasMany(presensiLocate::class, 'presensi_id', 'id');
+    }
 }

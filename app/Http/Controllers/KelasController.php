@@ -35,7 +35,7 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-
+        return $request->input();
         MapingKelas::Where([
             "rombongan_belajar_id" => $request->kelas_id,
             "peserta_didik_id" => $request->pd_id

@@ -50,7 +50,7 @@ class TambahSiswa extends Component
 
         $dataSiswa = [];
         foreach ($siswa as $key => $value) {
-            $dataSiswa[] = $value->Siswa->first();
+            $dataSiswa[] = $value->Siswa;
             $this->totalSiswa++;
         }
         $this->siswaDikelas = $dataSiswa;
@@ -62,7 +62,7 @@ class TambahSiswa extends Component
         $kelas = kelas::where("rombongan_belajar_id", $this->kelasSelect)->get();
         $dataSiswa = [];
         foreach ($siswa as $key => $value) {
-            $dataSiswa[] = $value->Siswa->first();
+            $dataSiswa[] = $value->Siswa;
         }
 
         foreach ($kelas as $key => $value) {
@@ -103,7 +103,8 @@ class TambahSiswa extends Component
         $dari = MapingKelas::where([
             "rombongan_belajar_id" => $this->kelasSelect
         ])->get();
-
+        // dump($this->kelas->rombongan_belajar_id);
+        // dd($dari);
         foreach ($dari as $key => $value) {
             # code...
             MapingKelas::create([

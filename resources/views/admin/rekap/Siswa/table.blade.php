@@ -18,8 +18,7 @@
             <div class="card">
                 <div class="d-flex card-header justify-content-between align-items-center">
                     <h4 class="header-title">{{ $pageTitle }}</h4>
-                    {{-- <a href="{{ Route('siswa.create') }}" class="btn btn-sm btn-light">Tambah siswa <i
-                            class="mdi mdi-plus ms-1"></i></a> --}}
+                  
                 </div>
 
                 <div class="card-body pt-0">

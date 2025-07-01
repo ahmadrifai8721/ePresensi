@@ -26,4 +26,8 @@ class Pembelajaran extends Model
     {
         return $this->hasOne(Guru::class, "id", "guruMapel");
     }
+    public function presensiGuru(): HasOne
+    {
+        return $this->hasOne(presensiGuru::class, "maple", "pembelajaran_id");
+    }
 }

@@ -20,7 +20,16 @@ class Absen
             # code...
             return $next($request);
         } else {
-            return abort(403 , "Absen Sedang Di tutup");
+
+            if (url("api/*")) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Absen Sedang Di tutup',
+                ], 403);
+            } else {
+
+                return abort(403, "Absen Sedang Di tutup");
+            }
         }
     }
 }

@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <title>Login | {{ env('APP_NAME', 'Ksoft E - Presensi') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
@@ -77,8 +78,8 @@
 
                                 <div class="mb-3 mb-0 text-center">
                                     <button class="btn btn-primary" type="submit"> Log In </button>
-                                    @if (env("APP_INSTALL"))
-                                    <a href="{{ route('install') }}" class="btn btn-secondary"> Install </a>
+                                    @if (env('APP_INSTALL'))
+                                        <a href="{{ route('install') }}" class="btn btn-secondary"> Install </a>
                                     @endif
                                 </div>
 
@@ -105,8 +106,8 @@
     <!-- Sweetalert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session('success'))
-    <script>
-        Swal.fire({
+        <script>
+            Swal.fire({
                 title: "<?= session('success') ?>",
                 icon: "success",
                 timer: 3000,
@@ -115,11 +116,11 @@
                 position: 'top-end',
                 showConfirmButton: false,
             })
-    </script>
+        </script>
     @endif
     @if (session('danger'))
-    <script>
-        Swal.fire({
+        <script>
+            Swal.fire({
                 title: "<?= session('danger') ?>",
                 icon: "error",
                 timer: 3000,
@@ -128,7 +129,7 @@
                 position: 'top-end',
                 showConfirmButton: false,
             })
-    </script>
+        </script>
     @endif
     <!-- App js -->
     <script src="{{ url('/') }}/assets/js/app.min.js"></script>

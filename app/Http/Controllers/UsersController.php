@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dapo_GTK;
+use App\Models\Dapo_PD;
 use App\Models\Guru;
+use App\Models\MobileAccess;
 use App\Models\Role;
 use App\Models\Siswa;
 use App\Models\user;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Str;
 use PhpParser\Node\Stmt\Return_;
+use Ramsey\Uuid\Uuid;
 
 class UsersController extends Controller
 {
@@ -26,8 +32,15 @@ class UsersController extends Controller
      */
     public function create()
     {
+
+        $dataGTK = Dapo_GTK::all();
+        $dataSiswa = Dapo_PD::all();
+        // dd($dataGTK);
+        $pengguna = $dataGTK->concat($dataSiswa);
+        // dd($dataGTK->count(), $dataSiswa->count(), $pengguna->count());
         return view("admin.Users.UsersCreate", [
             "pageTitle" => "Buat Users",
+            "pengguna" => $pengguna,
             "Role" => Role::all()
         ]);
     }
@@ -37,6 +50,8 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+
+        // return $request->all();
 
         $request->validate([
             "name" => 'required',
@@ -67,9 +82,25 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(user $user)
+    public function show(user $User)
     {
         //
+        // return $User;
+        $User->load("UserRole");
+        $User->createToken("token")->plainTextToken;
+        $User->tokens()->delete();
+        $tokenLast = $User->createToken("token")->plainTextToken;
+        $User->tokens;
+        $User->token = $tokenLast;
+        $MobileAccess = MobileAccess::updateOrCreate([
+            "user_id" => $User->id
+        ], [
+            "device_token" => $tokenLast,
+            "pin" => hash("crc32c", Date::now()),
+            "user_id" => $User->id
+        ]);
+        $User->mobleAccess = $MobileAccess;
+        return back()->with("success", "Token Berhasil Di Buat")->with("token", $tokenLast);
     }
 
     /**
@@ -87,13 +118,25 @@ class UsersController extends Controller
      */
     public function update(Request $request, user $User)
     {
-        $User->update($request->all());
+        if ($request->input("password") != null && $request->input("password") != "Password Dapodik" && $request->input("password") != "NISN Siswa") {
+            $request->merge(["password" => bcrypt($request->input("password"))]);
+            // dd($request->all());
+            $User->update($request->all());
 
-        UserRole::where("user_id", $User->id)->update([
-            "role_id" => $request->input("Role")
-        ]);
+            UserRole::where("user_id", $User->id)->update([
+                "role_id" => $request->input("Role")
+            ]);
 
-        return back()->with("success", "Data Berhasil Di Update");
+            return back()->with("success", "Data Berhasil Di Update");
+        } else {
+            unset($request["password"]);
+            $User->update($request->all());
+
+            UserRole::where("user_id", $User->id)->update([
+                "role_id" => $request->input("Role")
+            ]);
+            return back()->with("success", "Data Berhasil Di Update");
+        }
     }
 
     /**
