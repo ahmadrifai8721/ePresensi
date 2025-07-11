@@ -17,7 +17,7 @@ class PKLController extends Controller
     public function index()
     {
 
-        return view("admin.pkl.pkl", ['pkl' => tempatPKL::all()->sortByDesc("pkl", SORT_NUMERIC), "pageTitle" => "Daftar pkl"]);
+        return view("admin.PKL.pkl", ['pkl' => tempatPKL::all()->sortByDesc("pkl", SORT_NUMERIC), "pageTitle" => "Daftar pkl"]);
     }
 
     /**
@@ -25,7 +25,7 @@ class PKLController extends Controller
      */
     public function create()
     {
-        return view("admin.pkl.pklCreate", ["gurus" => Guru::all(), "jurusans" => Dapo_Jurusan::all(), "pageTitle" => "Buat Tempat PKL "]);
+        return view("admin.PKL.pklCreate", ["gurus" => Guru::all(), "jurusans" => Dapo_Jurusan::all(), "pageTitle" => "Buat Tempat PKL "]);
         //
     }
 
@@ -56,7 +56,7 @@ class PKLController extends Controller
         }
         // return $pkl->mapingpkl;
 
-        return view("admin.pkl.pklShow", ['Siswa' => $siswa, "pkl_id" => $pkl->id, "pageTitle" => "Daftar Diswa pkl $pkl->pkl"]);
+        return view("admin.PKL.pklShow", ['Siswa' => $siswa, "pkl_id" => $pkl->id, "pageTitle" => "Daftar Diswa pkl $pkl->pkl"]);
     }
 
     /**
@@ -64,7 +64,7 @@ class PKLController extends Controller
      */
     public function edit(tempatPKL $pkl)
     {
-        return view("admin.pkl.pklEdit", ['pkl' => $pkl, "gurus" => Guru::all(), "pageTitle" => "Edit pkl $pkl->pkl"]);
+        return view("admin.PKL.pklEdit", ['pkl' => $pkl, "gurus" => Guru::all(), "pageTitle" => "Edit pkl $pkl->pkl"]);
     }
 
     /**
