@@ -141,7 +141,7 @@ class presensiAPIController extends Controller
                 'message' => 'Presensi created successfully',
                 'dataPresensi' => $presensi,
                 'dataPresensiLocate' => $presensiLocate,
-            ], 201);
+            ], 200);
         } else {
 
 
@@ -159,7 +159,7 @@ class presensiAPIController extends Controller
                 'longitude' => $data['longitude'],
                 'latitude' => $data['latitude'],
             ]);
-            return response()->json($presensi, 201);
+            return response()->json($presensi, 200);
         }
     }
 

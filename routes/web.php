@@ -7,7 +7,9 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MobileAccessController;
 use App\Http\Controllers\pembelajaranController;
+use App\Http\Controllers\PKLController;
 use App\Http\Controllers\PresensiController;
+use App\Http\Controllers\PresensiPKLController;
 use App\Http\Controllers\rekapCetakController;
 use App\Http\Controllers\rekapGuruController;
 use App\Http\Controllers\rekapSiswaController;
@@ -21,8 +23,11 @@ use App\Models\Pembelajaran;
 use App\Models\Role;
 use App\Models\Setting;
 use App\Models\Siswa;
+use App\Models\tempatPKL;
 use App\Models\User;
 use App\Models\UserRole;
+use Illuminate\Http\Client\Request as ClientRequest;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -53,8 +58,11 @@ Route::get('logout', function (Request $request) {
     return redirect('/');
 })->name("logout")->middleware("auth");
 Route::resource('/', PresensiController::class)->names("home")->middleware(["Absen", "auth"]);
+Route::resource('/presensi/pkl', PresensiPKLController::class)->names("PKL")->middleware(["Absen",]);
 Route::prefix('admin')->middleware("auth")->group(function () {
     Route::get("/", [Dashboard::class, 'index'])->name("dashboard");
+
+    // kelas
 
     Route::resource('/kelas', KelasController::class);
     Route::get("/kelas/mapingKelas/{Kelas}", function (kelas $Kelas) {
@@ -73,6 +81,8 @@ Route::prefix('admin')->middleware("auth")->group(function () {
         return redirect()->route("kelas.index")->with("success", "Kelas berhasil ditambahkan");
     })->name("kelas.tambahKelas");
 
+    // rekap
+
     Route::prefix("/Rekap")->group(function () {
         Route::resource('/Siswa', rekapSiswaController::class)->names("rekapSiswa");
         Route::get('/SiswaPerKelas/{kelas}', [rekapSiswaController::class, "kelas"])->name("rekapSiswaPerkelas");
@@ -90,6 +100,21 @@ Route::prefix('admin')->middleware("auth")->group(function () {
         Route::resource("setting", SettingController::class);
         Route::put('/userAdmin', [SettingController::class, 'userAdmin'])->name("setting.userAdmin");
     });
+
+    // PKL
+    Route::resource('/pkl', PKLController::class)->names("adminPKL");
+    Route::post("/pkl/tambahpkl", function (Request $request) {
+
+        $data = request()->all();
+
+        tempatPKL::create($data);
+
+        return redirect()->route("adminPKL.index")->with("success", "pkl berhasil ditambahkan");
+    })->name("adminPKL.tambahpkl");
+    Route::get("/pkl/mapingpkl/{tempatPKL}", function (tempatPKL $tempatPKL) {
+
+        return view("admin.pkl.pklTambahsiswa", ['pkl' => $tempatPKL, "siswa" => Siswa::all(), "pageTitle" => "Edit Daftar Siswa pkl $tempatPKL->pkl"]);
+    })->name("adminPKL.maping");
 });
 Route::resource("Authentication", Authentication::class)->middleware("guest");
 

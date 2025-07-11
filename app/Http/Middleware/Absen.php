@@ -20,8 +20,8 @@ class Absen
             # code...
             return $next($request);
         } else {
-
-            if (url("api/*")) {
+            // dd(url()->current());
+            if (url()->current() == url('api/*')) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Absen Sedang Di tutup',

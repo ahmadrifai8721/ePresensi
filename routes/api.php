@@ -187,6 +187,7 @@ Route::prefix('/app')->group(function () {
                 })(),
                 'nama' => Auth::user()->name,
                 'email' => Auth::user()->email,
+                'role' => Auth::user()->UserRole->role->role,
                 'firstPresensi' => Auth::user()->Guru->presensi->where('tanggal', date('d/m/Y'))->first()
                     ? date("H:i", Auth::user()->Guru->presensi->where('tanggal', date('d/m/Y'))->first()->updated_at->timestamp)
                     : '-:-',
@@ -211,6 +212,7 @@ Route::prefix('/app')->group(function () {
                 })(),
                 'nama' => Auth::user()->name,
                 'email' => Auth::user()->email,
+                'role' => Auth::user()->UserRole->role->role,
                 'firstPresensi' => Auth::user()->Siswa->presensi->where('tanggal', date('d/m/Y'))->first()
                     ? date("H:i", Auth::user()->Siswa->presensi->where('tanggal', date('d/m/Y'))->first()->updated_at->timestamp)
                     : '-:-',
