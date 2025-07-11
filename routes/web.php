@@ -113,7 +113,7 @@ Route::prefix('admin')->middleware("auth")->group(function () {
     })->name("adminPKL.tambahpkl");
     Route::get("/pkl/mapingpkl/{tempatPKL}", function (tempatPKL $tempatPKL) {
 
-        return view("admin.PKL.pklTambahsiswa", ['pkl' => $tempatPKL, "siswa" => Siswa::all(), "pageTitle" => "Edit Daftar Siswa pkl $tempatPKL->pkl"]);
+        return view("admin.PKL.pklTambahsiswa", ['pkl' => $tempatPKL, "siswa" => Siswa::all(), "pageTitle" => "Edit Daftar Siswa pkl $tempatPKL->nama"]);
     })->name("adminPKL.maping");
 });
 Route::resource("Authentication", Authentication::class)->middleware("guest");
