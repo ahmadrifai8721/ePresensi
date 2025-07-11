@@ -110,7 +110,7 @@ class UsersController extends Controller
     {
         //
         // return $User;
-        return view("admin.users.usersEdit", ['Users' => $User, "pageTitle" => "Edit Data users $User->name", "Role" => Role::all()]);
+        return view("admin.Users.UsersEdit", ['Users' => $User, "pageTitle" => "Edit Data users $User->name", "Role" => Role::all()]);
     }
 
     /**
