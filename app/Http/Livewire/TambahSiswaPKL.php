@@ -47,13 +47,14 @@ class TambahSiswaPKL extends Component
     {
 
         $siswa = MapingPKL::where("tempat_p_k_l_id", $this->TempatPKLSelect)->get();
+        $siswapkl = MapingPKL::all();
 
         $dataSiswa = [];
         foreach ($siswa as $key => $value) {
             $dataSiswa[] = $value->Siswa;
             $this->totalSiswa++;
         }
-        $mappedSiswaIds = $siswa->pluck('siswa_id')->toArray();
+        $mappedSiswaIds = $siswapkl->pluck('siswa_id')->toArray();
         $this->siswa = Siswa::whereNotIn('id', $mappedSiswaIds)->get();
         $this->siswaDiTempatPKL = $dataSiswa;
     }
