@@ -87,7 +87,7 @@ class TambahSiswaPKL extends Component
 
             $this->siswa = $siswa;
         }
-        $this->updateData();
+        // $this->updateData();
     }
 
     function tambahSiswa(String $peserta_didik_id)
