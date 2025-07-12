@@ -79,20 +79,14 @@ class TambahSiswaPKL extends Component
 
         if ($this->siswaCari != " ") {
             # code...
-            $siswa = Siswa::Where("name", "LIKE", "%" . $this->siswaCari . "%")
-                ->orWhere("nisn", "LIKE", "%" . $this->siswaCari . "%")
+            $mappedSiswaIds = MapingPKL::pluck('siswa_id')->toArray();
+            $siswa = Siswa::where(function ($query) {
+                    $query->where("name", "LIKE", "%" . $this->siswaCari . "%")
+                          ->orWhere("nisn", "LIKE", "%" . $this->siswaCari . "%");
+                })
+                ->whereNotIn('id', $mappedSiswaIds)
                 ->get();
-            $siswa = MapingPKL::where("tempat_p_k_l_id", $this->TempatPKLSelect)->get();
-
-            // dump($siswa);
-
-            $dataSiswa = [];
-            foreach ($siswa as $key => $value) {
-                $dataSiswa[] = $value->Siswa;
-                $this->totalSiswa++;
-            }
             $this->siswa = $siswa;
-            $this->siswaDiTempatPKL = $dataSiswa;
         }
         // $this->updateData();
     }

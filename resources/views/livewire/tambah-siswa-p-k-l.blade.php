@@ -75,16 +75,16 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
                                             <h5 class="font-14 my-1 fw-normal">Name</h5>
-                                            <span class="text-muted font-13">{{ $item->name }}</span>
+                                            <span class="text-muted font-13">{{ $item['name'] }}</span>
                                         </td>
                                         <td>
                                             <h5 class="font-14 my-1 fw-normal">NISN</h5>
-                                            <span class="text-muted font-13">{{ $item->nisn }}</span>
+                                            <span class="text-muted font-13">{{ $item['nisn'] }}</span>
                                         </td>
                                         <td>
                                             <h5 class="font-14 my-1 fw-normal">Action</h5>
                                             <a href="#keluarkan" class="btn btn-danger font-13"
-                                                wire:click="keluarkan('{{ $item->id }}')">Hapus</a>
+                                                wire:click="keluarkan('{{ $item['id'] }}')">Hapus</a>
                                         </td>
                                     </tr>
                                 @empty
