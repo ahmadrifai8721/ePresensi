@@ -98,7 +98,7 @@
                         <i class="mdi mdi-google-classroom font-16 me-1"></i>
                         <span>
                             {{ $item->nama }} <br>
-                            {{ $item->penanggung_jawab }}
+                            {{ $item->PenanggungJawab->nama }}
                         </span>
                     </a>
 
