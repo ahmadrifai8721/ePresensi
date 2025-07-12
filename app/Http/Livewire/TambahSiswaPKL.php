@@ -39,7 +39,6 @@ class TambahSiswaPKL extends Component
 
     public function render()
     {
-        $this->updateData();
         return view('livewire.tambah-siswa-p-k-l');
     }
 

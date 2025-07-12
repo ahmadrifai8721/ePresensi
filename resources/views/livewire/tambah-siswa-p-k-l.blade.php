@@ -12,7 +12,7 @@
                         <input type="text" name="cariSiswa" id="cariSiswa" wire:model.live="siswaCari"
                             class="form-control mb-3" wire:keyup="findSiswa"
                             placeholder="Masukkan nama siswa atau nisn">
-                        <table class="table table-centered table-nowrap table-hover mb-0">
+                        <table class="table table-centered table-nowrap table-hover mb-0" wire:ignore.self>
                             <tbody>
                                 @forelse ($siswa as $item)
                                     <tr>
