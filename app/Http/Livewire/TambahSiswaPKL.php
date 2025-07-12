@@ -39,6 +39,7 @@ class TambahSiswaPKL extends Component
 
     public function render()
     {
+        $this->updateData();
         return view('livewire.tambah-siswa-p-k-l');
     }
 
@@ -87,6 +88,7 @@ class TambahSiswaPKL extends Component
 
             $this->siswa = $siswa;
         }
+        $this->updateData();
     }
 
     function tambahSiswa(String $peserta_didik_id)
