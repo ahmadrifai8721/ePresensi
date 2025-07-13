@@ -1,6 +1,6 @@
 <div>
     <div class="row">
-        <div class="col-xl-6 col-lg-6 order-lg-2 order-xl-1">
+        <div class="col-xl-8 col-lg-8 order-lg-2 order-xl-1">
             <div class="card">
                 <div class="d-flex card-header justify-content-between align-items-center">
                     <h4 class="header-title">Semua Siswa</h4>
@@ -51,7 +51,7 @@
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col-->
-        <div class="col-xl-6 col-lg-6 order-lg-2 order-xl-1">
+        <div class="col-xl-4 col-lg-4 order-lg-2 order-xl-1">
             <div class="card">
                 <div class="d-flex card-header justify-content-between align-items-center">
                     <h4 class="header-title">Siswa Di TempatPKL {{ $TempatPKL->TempatPKL }}</h4>
