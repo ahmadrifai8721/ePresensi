@@ -98,6 +98,7 @@ class TambahSiswaPKL extends Component
             "tempat_p_k_l_id" => $this->TempatPKLSelect,
             "siswa_id" => $peserta_didik_id
         ]);
+        $this->siswaCari = "";
         $this->updateData();
     }
 
