@@ -53,7 +53,11 @@ class PresensiPKL extends Component
     {
 
         // dump($this->sudahAbsen = PresensiPKLModel::where(['siswa_id' => $this->siswa_id, 'tempat_p_k_l_id' => $this->tempatPKLselect])->exists());
-        if ($this->sudahAbsen = PresensiPKLModel::where(['siswa_id' => $this->siswa_id, 'tempat_p_k_l_id' => $this->tempatPKLselect])->exists()) {
+        if ($this->sudahAbsen = PresensiPKLModel::where([
+            'siswa_id' => $this->siswa_id,
+            'tempat_p_k_l_id' => $this->tempatPKLselect,
+            'tanggal' => date("d/m/Y")
+        ])->exists()) {
             # code...
             $this->siswa_id_check = false;
             $this->sudahAbsen = true;
