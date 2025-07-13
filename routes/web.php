@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\PresensiPKLExport;
 use App\Http\Controllers\Authentication;
 use App\Http\Controllers\Dapo;
 use App\Http\Controllers\Dashboard;
@@ -20,6 +21,7 @@ use App\Models\Dapo_Log;
 use App\Models\Dapo_Sekolah;
 use App\Models\kelas;
 use App\Models\Pembelajaran;
+use App\Models\PresensiPKLModel;
 use App\Models\Role;
 use App\Models\Setting;
 use App\Models\Siswa;
@@ -33,6 +35,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,6 +118,12 @@ Route::prefix('admin')->middleware("auth")->group(function () {
 
         return view("admin.PKL.pklTambahsiswa", ['pkl' => $tempatPKL, "siswa" => Siswa::all(), "pageTitle" => "Edit Daftar Siswa pkl $tempatPKL->nama"]);
     })->name("adminPKL.maping");
+    Route::get("/pkl/export/excel", function () {
+
+        return view('admin.pkl.pklExport', [
+            'presensiPKLModel' => PresensiPKLModel::all()
+        ]);
+    })->name("adminPKL.exportExcel");
 });
 Route::resource("Authentication", Authentication::class)->middleware("guest");
 

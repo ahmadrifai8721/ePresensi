@@ -84,7 +84,11 @@ class SiswaController extends Controller
             "Sakit" => $siswa->presensi()->where("presensi", "Sakit"),
             "Izin" => $siswa->presensi()->where("presensi", "Izin"),
             "Alfa" => $siswa->presensi()->where("presensi", "Alfa"),
-            "Hadir" => $siswa->presensi()->where("presensi", "Hadir")
+            "Hadir" => $siswa->presensi()->where("presensi", "Hadir"),
+            "SakitPKL" => $siswa->presensiPKL()->where("presensi", "Sakit"),
+            "IzinPKL" => $siswa->presensiPKL()->where("presensi", "Izin"),
+            "AlfaPKL" => $siswa->presensiPKL()->where("presensi", "Alfa"),
+            "HadirPKL" => $siswa->presensiPKL()->where("presensi", "Hadir")
         ]);
     }
 
@@ -103,7 +107,7 @@ class SiswaController extends Controller
     {
         // return $request->input();
         $siswa->update($request->input());
-        return redirect()->route("siswa.show",$siswa->id)->with("success", "Data siswa $siswa->name Berhasil Di Update");
+        return redirect()->route("siswa.show", $siswa->id)->with("success", "Data siswa $siswa->name Berhasil Di Update");
     }
 
     /**

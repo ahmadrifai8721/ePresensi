@@ -23,6 +23,11 @@ class Siswa extends Model
         return $this->hasMany(MapingKelas::class, "peserta_didik_id", "peserta_didik_id");
     }
 
+    public function mapingPKL(): HasOne
+    {
+        return $this->hasOne(MapingPKL::class);
+    }
+
     function User(): HasOne
     {
         return $this->hasOne(User::class, "id", "user_id");
@@ -39,5 +44,9 @@ class Siswa extends Model
     function presensiMapel(): HasMany
     {
         return $this->hasMany(presensiSiswaMapel::class, "siswa_id", "id");
+    }
+    function presensiPKL(): HasMany
+    {
+        return $this->hasMany(PresensiPKLModel::class, "siswa_id", "id");
     }
 }

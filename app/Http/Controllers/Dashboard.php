@@ -6,6 +6,7 @@ use App\Models\kelas;
 use App\Models\presensi;
 use App\Models\presensiGuru;
 use App\Models\presensiLog;
+use App\Models\PresensiPKLModel;
 use Illuminate\Http\Request;
 
 class Dashboard extends Controller
@@ -35,6 +36,12 @@ class Dashboard extends Controller
             "guruAlfa" => presensiGuru::where("presensi", "Alfa")->count(),
             "guruIzin" => presensiGuru::where("presensi", "Izin")->count(),
             "presensiGuru" => presensiGuru::all(),
+            "pklHadir" => PresensiPKLModel::where("presensi", "Hadir")->count(),
+            "pklTugas" => PresensiPKLModel::where("presensi", "Tugas")->count(),
+            "pklSakit" => PresensiPKLModel::where("presensi", "Sakit")->count(),
+            "pklAlfa" => PresensiPKLModel::where("presensi", "Alfa")->count(),
+            "pklIzin" => PresensiPKLModel::where("presensi", "Izin")->count(),
+            "presensipkl" => PresensiPKLModel::all(),
         ]);
     }
 
