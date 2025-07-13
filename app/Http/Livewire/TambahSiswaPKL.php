@@ -60,19 +60,19 @@ class TambahSiswaPKL extends Component
 
     function findTempatPKL()
     {
+
         $siswa = MapingPKL::where("tempat_p_k_l_id", $this->TempatPKLSelect)->get();
-        $TempatPKL = TempatPKL::where("id", $this->TempatPKLSelect)->get();
+        $siswapkl = MapingPKL::all();
+
         $dataSiswa = [];
         foreach ($siswa as $key => $value) {
             $dataSiswa[] = $value->Siswa;
+            $this->totalSiswa++;
         }
-
-        foreach ($TempatPKL as $key => $value) {
-            # code...
-            $this->waliTempatPKL = $value->Guru->first()->nama;
-        }
-        // dump($dataSiswa);
-        $this->siswaSelect = $dataSiswa;
+        $mappedSiswaIds = $siswapkl->pluck('siswa_id')->toArray();
+        $this->siswa = Siswa::whereNotIn('id', $mappedSiswaIds)->get();
+        $this->siswaDiTempatPKL = $dataSiswa;
+        $this->pageTitle = "Edit Daftar Siswa pkl " . (tempatPKL::find($this->TempatPKLSelect)->nama ?? "Tempat PKL Tidak Di temukan");
     }
     function findSiswa()
     {
@@ -81,9 +81,9 @@ class TambahSiswaPKL extends Component
             # code...
             $mappedSiswaIds = MapingPKL::pluck('siswa_id')->toArray();
             $siswa = Siswa::where(function ($query) {
-                    $query->where("name", "LIKE", "%" . $this->siswaCari . "%")
-                          ->orWhere("nisn", "LIKE", "%" . $this->siswaCari . "%");
-                })
+                $query->where("name", "LIKE", "%" . $this->siswaCari . "%")
+                    ->orWhere("nisn", "LIKE", "%" . $this->siswaCari . "%");
+            })
                 ->whereNotIn('id', $mappedSiswaIds)
                 ->get();
             $this->siswa = $siswa;

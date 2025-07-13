@@ -15,4 +15,9 @@ class MapingPKL extends Model
     {
         return $this->belongsTo(Siswa::class, 'siswa_id');
     }
+
+    public function tempat()
+    {
+        return $this->belongsTo(tempatPKL::class);
+    }
 }

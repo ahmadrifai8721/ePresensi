@@ -1,14 +1,31 @@
 <div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title">{{ $pageTitle }}</h4>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-xl-8 col-lg-8 order-lg-2 order-xl-1">
             <div class="card">
                 <div class="d-flex card-header justify-content-between align-items-center">
                     <h4 class="header-title">Semua Siswa</h4>
-
                 </div>
 
                 <div class="card-body pt-0">
                     <div class="table-responsive">
+                        <div class="my-2">
+                            <select id="TempatPKLSelect" class="form-select" wire:model="TempatPKLSelect"
+                                wire:change='findTempatPKL'>
+                                <option value="">-- Pilih Tempat PKL --</option>
+                                @foreach ($daftarTempatPKL as $tempat)
+                                    <option value="{{ $tempat->id }}">{{ $tempat->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <input type="text" name="cariSiswa" id="cariSiswa" wire:model.live="siswaCari"
                             class="form-control mb-3" wire:keyup="findSiswa"
                             placeholder="Masukkan nama siswa atau nisn">
