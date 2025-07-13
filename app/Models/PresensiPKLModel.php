@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use App\Models\TempatPKL;
+use App\Models\tempatPKL;
 
 class PresensiPKLModel extends Model
 {
@@ -20,6 +20,6 @@ class PresensiPKLModel extends Model
     }
     public function tempat(): BelongsTo
     {
-        return $this->belongsTo(TempatPKL::class, "tempat_p_k_l_id", "id");
+        return $this->belongsTo(tempatPKL::class, "tempat_p_k_l_id", "id");
     }
 }
