@@ -34,8 +34,8 @@
                                     @forelse ($tempat as $item)
                                         <tr>
                                             <td>
-                                                <h5 class="font-14 my-1 fw-normal">Tempa</h5>
-                                                <span class="text-muted font-13">{{ $item->id }}</span>
+                                                <h5 class="font-14 my-1 fw-normal">Tempat</h5>
+                                                <span class="text-muted font-13">{{ $item->nama }}</span>
                                             </td>
                                             <td>
                                                 <h5 class="font-14 my-1 fw-normal">Data Absensi</h5>
