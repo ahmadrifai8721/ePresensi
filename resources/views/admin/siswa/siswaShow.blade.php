@@ -152,7 +152,13 @@
 
                             <div class="form-floating mb-3">
                                 <input type="text" readonly class="form-control disabled" id="floatingKelas"
-                                    value="{{ $siswa->mapingKelas->first()->Kelas->kelas }}" />
+                                    value="{{ $siswa->mapingKelas->first()->tempat->nama }}" />
+                                <label for="floatingKelas">Kelas</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" readonly class="form-control disabled" id="floatingKelas"
+                                    value="{{ $siswa->mapingPKL->first()->Kelas->kelas }}" />
                                 <label for="floatingKelas">Kelas</label>
                             </div>
 
