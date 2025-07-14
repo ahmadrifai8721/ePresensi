@@ -167,7 +167,7 @@
                                     <div class="form-floating mb-3">
                                         <input type="text" readonly class="form-control disabled" id="floatingKelas"
                                             value="{{ $siswa->mapingPKL->first()->tempat->penanggungJawab->nama ?? 'Temapat PKL Belum Di isi' }}" />
-                                        <label for="floatingKelas">Temapat PKL</label>
+                                        <label for="floatingKelas">Penggung Jawab Temapat PKL</label>
                                     </div>
                                 </div>
                             </div>
