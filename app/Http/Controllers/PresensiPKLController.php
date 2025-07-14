@@ -41,7 +41,7 @@ class PresensiPKLController extends Controller
         }
         if ($bukti == null) {
             return redirect()->back()->withErrors(['presensi_file' => 'Bukti presensi harus diunggah.']);
-        } elseif (PresensiPKLModel::where(['bukti' => $bukti, 'siswa_id' => $request->siswa_id])->first()) {
+        } elseif (PresensiPKLModel::where(['bukti' => $bukti, 'tempat_p_k_l_id' =>  $request->tempat_p_k_l_id])->first()) {
             return redirect()->back()->withErrors(['presensi_file' => 'Bukti presensi Sudah Pernah Di Upload.']);
         } elseif ($request->file('presensi_file')->getSize() > 10 * 1024 * 1024) {
             return redirect()->back()->withErrors(['presensi_file' => 'Ukuran file maksimal 10 MB.']);
