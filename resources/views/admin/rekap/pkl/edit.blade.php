@@ -58,7 +58,8 @@
                                             <td>
                                                 <h5 class="font-14 my-1 fw-normal">Bukti</h5>
                                                 <img src="{{ asset('storage/buktiPresensiPKL') . '/' . $item->bukti }}"
-                                                    alt="" srcset="" width="100">
+                                                    alt="" width="100" style="cursor: zoom-in"
+                                                    onclick="window.open(this.src, '_blank')" />
                                             </td>
                                             <td>
                                                 <h5 class="font-14 my-1 fw-normal">Presensi</h5>
