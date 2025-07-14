@@ -120,7 +120,7 @@ Route::prefix('admin')->middleware("auth")->group(function () {
     })->name("adminPKL.maping");
     Route::get("/pkl/export/excel", function () {
 
-        return view('admin.pkl.pklExport', [
+        return view('admin.PKL.pklExport', [
             'presensiPKLModel' => PresensiPKLModel::all()
         ]);
     })->name("adminPKL.exportExcel");
