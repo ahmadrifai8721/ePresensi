@@ -18,6 +18,6 @@ class MapingPKL extends Model
 
     public function tempat()
     {
-        return $this->belongsTo(tempatPKL::class);
+        return $this->belongsTo(tempatPKL::class, 'tempat_p_k_l_id', 'id');
     }
 }
