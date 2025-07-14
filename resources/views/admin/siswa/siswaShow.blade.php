@@ -155,11 +155,21 @@
                                     value="{{ $siswa->mapingKelas->first()->Kelas->kelas }}" />
                                 <label for="floatingKelas">Kelas</label>
                             </div>
-
-                            <div class="form-floating mb-3">
-                                <input type="text" readonly class="form-control disabled" id="floatingKelas"
-                                    value="{{ $siswa->mapingPKL->first()->tempat->nama }}" />
-                                <label for="floatingKelas">Kelas</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" readonly class="form-control disabled" id="floatingKelas"
+                                            value="{{ $siswa->mapingPKL->first()->tempat->nama ?? 'Temapat PKL Belum Di isi' }}" />
+                                        <label for="floatingKelas">Temapat PKL</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" readonly class="form-control disabled" id="floatingKelas"
+                                            value="{{ $siswa->mapingPKL->first()->tempat->penanggungJawab->nama ?? 'Temapat PKL Belum Di isi' }}" />
+                                        <label for="floatingKelas">Temapat PKL</label>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-floating mb-3">
