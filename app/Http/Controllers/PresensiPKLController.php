@@ -42,6 +42,8 @@ class PresensiPKLController extends Controller
             return redirect()->back()->withErrors(['presensi_file' => 'Bukti presensi harus diunggah.']);
         } elseif (PresensiPKLModel::where(['bukti' => $bukti, 'siswa_id' => $request->siswa_id])->first()) {
             return redirect()->back()->withErrors(['presensi_file' => 'Bukti presensi Sudah Pernah Di Upload.']);
+        } elseif ($request->file('presensi_file')->getSize() > 2 * 1024 * 1024) {
+            return redirect()->back()->withErrors(['presensi_file' => 'Ukuran file maksimal 2 MB.']);
         } else {
             $request->file('presensi_file')->storeAs('buktiPresensiPKL', $bukti, 'public');
         }
