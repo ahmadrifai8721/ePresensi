@@ -185,6 +185,9 @@
                             <li>
                                 <a href="{{ route('rekapGuru.index') }}">Guru</a>
                             </li>
+                            <li>
+                                <a href="{{ route('rekapPKL.index') }}">PKL</a>
+                            </li>
                         @endif
                         <li>
                             <a href="{{ route('rekapCetak.index') }}">Cetak</a>

@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\kelas;
-use App\Models\Presensi;
 use App\Models\PresensiPKLModel;
 use Illuminate\Http\Request;
 
@@ -63,7 +61,7 @@ class PresensiPKLController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Presensi $presensi)
+    public function show(PresensiPKLModel $presensi)
     {
         //
     }
@@ -71,7 +69,7 @@ class PresensiPKLController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Presensi $presensi)
+    public function edit(PresensiPKLModel $presensi)
     {
         //
     }
@@ -79,16 +77,32 @@ class PresensiPKLController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Presensi $presensi)
+    public function update(Request $request, PresensiPKLModel $pkl)
     {
         //
+
+        // return $request;
+        // return $pkl;
+        $pkl->update([
+            'presensi' => $request->presensi,
+        ]);
+        return redirect()->back()->with('success', 'Presensi PKL Berhasil Di Update');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Presensi $presensi)
+    public function destroy(PresensiPKLModel $pkl)
     {
         //
+        // return $pkl;
+        $nama = $pkl->siswa->name;
+        $Tempat = $pkl->Tempat->Tempat;
+        $tanggal = $pkl->tanggal;
+        if ($pkl->bukti && file_exists(public_path("storage/buktiPresensiPKL/{$pkl->bukti}"))) {
+            unlink(public_path("storage/buktiPresensiPKL/{$pkl->bukti}"));
+        }
+        $pkl->delete();
+        return back()->with("success", "Data Absensi $nama Tempat $Tempat Tanggal $tanggal <br> <strong> Berhasil Di Hapus </strong>");
     }
 }

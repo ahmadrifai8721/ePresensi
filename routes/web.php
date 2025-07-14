@@ -13,6 +13,7 @@ use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\PresensiPKLController;
 use App\Http\Controllers\rekapCetakController;
 use App\Http\Controllers\rekapGuruController;
+use App\Http\Controllers\rekapPKLController;
 use App\Http\Controllers\rekapSiswaController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SiswaController;
@@ -90,6 +91,7 @@ Route::prefix('admin')->middleware("auth")->group(function () {
         Route::resource('/Siswa', rekapSiswaController::class)->names("rekapSiswa");
         Route::get('/SiswaPerKelas/{kelas}', [rekapSiswaController::class, "kelas"])->name("rekapSiswaPerkelas");
         Route::resource('/Guru', rekapGuruController::class)->names("rekapGuru");
+        Route::resource('/Pkl', rekapPKLController::class)->names("rekapPKL");
         Route::resource('/Cetak', rekapCetakController::class)->names("rekapCetak");
     });
 
@@ -124,9 +126,9 @@ Route::prefix('admin')->middleware("auth")->group(function () {
             'presensiPKLModel' => PresensiPKLModel::all()
         ]);
     })->name("adminPKL.exportExcel");
-    Route::get("/info", function () {
-        phpinfo();
-    });
+    // Route::get("/info", function () {
+    //     phpinfo();
+    // });
 });
 Route::resource("Authentication", Authentication::class)->middleware("guest");
 

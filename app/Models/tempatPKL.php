@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class tempatPKL extends Model
 {
@@ -18,5 +19,10 @@ class tempatPKL extends Model
     public function penanggungJawab()
     {
         return $this->belongsTo(Guru::class, "penanggung_jawab");
+    }
+
+    public function presensiPKL(): HasMany
+    {
+        return $this->hasMany(PresensiPKLModel::class);
     }
 }
