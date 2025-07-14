@@ -57,9 +57,22 @@
                                             </td>
                                             <td>
                                                 <h5 class="font-14 my-1 fw-normal">Bukti</h5>
+                                                <!-- Image thumbnail -->
                                                 <img src="{{ asset('storage/buktiPresensiPKL') . '/' . $item->bukti }}"
                                                     alt="" width="100" style="cursor: zoom-in"
-                                                    onclick="window.open(this.src, '_blank')" />
+                                                    data-bs-toggle="modal" data-bs-target="#zoomModal{{ $item->id }}" />
+
+                                                <!-- Modal for zoomed image -->
+                                                <div class="modal fade" id="zoomModal{{ $item->id }}" tabindex="-1" aria-labelledby="zoomModalLabel{{ $item->id }}" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                        <div class="modal-content bg-transparent border-0">
+                                                            <div class="modal-body text-center p-0">
+                                                                <img src="{{ asset('storage/buktiPresensiPKL') . '/' . $item->bukti }}"
+                                                                    alt="" class="img-fluid rounded" style="max-height:80vh;" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                             <td>
                                                 <h5 class="font-14 my-1 fw-normal">Presensi</h5>
