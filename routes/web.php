@@ -124,6 +124,9 @@ Route::prefix('admin')->middleware("auth")->group(function () {
             'presensiPKLModel' => PresensiPKLModel::all()
         ]);
     })->name("adminPKL.exportExcel");
+    Route::get("/info", function () {
+        phpinfo();
+    });
 });
 Route::resource("Authentication", Authentication::class)->middleware("guest");
 
