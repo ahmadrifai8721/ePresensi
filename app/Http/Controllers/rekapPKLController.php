@@ -97,4 +97,15 @@ class rekapPKLController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(PresensiPKLModel $Pkl) {}
+
+    public function Date(string $Pkl)
+    {
+
+        $date = $Pkl == 0 ? date('d/m/Y') : $Pkl;
+
+        return view("admin/rekap/pkl/showDate", [
+            "pageTitle" => "Rekap PKL Tanggal " . $date,
+            "date" => $date,
+        ]);
+    }
 }

@@ -92,6 +92,7 @@ Route::prefix('admin')->middleware("auth")->group(function () {
         Route::get('/SiswaPerKelas/{kelas}', [rekapSiswaController::class, "kelas"])->name("rekapSiswaPerkelas");
         Route::resource('/Guru', rekapGuruController::class)->names("rekapGuru");
         Route::resource('/Pkl', rekapPKLController::class)->names("rekapPKL");
+        Route::get('/PKLPerhari/{Date}', [rekapPKLController::class, "Date"])->name("rekapPKLPerhari");
         Route::resource('/Cetak', rekapCetakController::class)->names("rekapCetak");
     });
 

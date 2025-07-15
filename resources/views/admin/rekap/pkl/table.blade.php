@@ -29,6 +29,8 @@
                                         <td colspan="3">
                                             <h5 class="font-14 my-1 fw-normal">Jumlah Siswa Yang Absen Hari Ini:
                                                 {{ $totalSiswa }}</h5>
+                                            <a href="{{ route('rekapPKLPerhari', 0) }}" class="btn btn-soft-success">Lihat
+                                                Daftar Absen</a>
                                         </td>
                                     </tr>
                                     @forelse ($tempat as $item)

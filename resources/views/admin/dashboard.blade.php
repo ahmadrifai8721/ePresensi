@@ -470,7 +470,7 @@
             <div class="col-xl-12col-lg-12 order-lg-2 order-xl-1">
                 <div class="card">
                     <div class="d-flex card-header justify-content-between align-items-center">
-                        <h4 class="header-title">Presensi Guru</h4>
+                        <h4 class="header-title">Presensi Guru Hari ini</h4>
                         {{-- <a href="javascript:void(0);" class="btn btn-sm btn-light">Export <i
                             class="mdi mdi-download ms-1"></i></a> --}}
                     </div>
@@ -545,7 +545,7 @@
             <div class="col-xl-12col-lg-12 order-lg-2 order-xl-1">
                 <div class="card">
                     <div class="d-flex card-header justify-content-between align-items-center">
-                        <h4 class="header-title">Presensi PKL</h4>
+                        <h4 class="header-title">Presensi PKL Hari INI</h4>
                         <a href="{{ route('adminPKL.exportExcel') }}" class="btn btn-sm btn-light">Export <i
                                 class="mdi mdi-download ms-1"></i></a>
                     </div>

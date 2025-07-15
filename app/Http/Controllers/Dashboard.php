@@ -30,18 +30,48 @@ class Dashboard extends Controller
             "izinHariIni" => $this->getPresensiSiswa(date("d/m/Y"), "Izin"),
             "alfaHariIni" => $this->getPresensiSiswa(date("d/m/Y"), "Alfa"),
             "hadirHariIni" => $this->getPresensiSiswa(date("d/m/Y"), "Hadir"),
-            "guruHadir" => presensiGuru::where("presensi", "Hadir")->count(),
-            "guruTugas" => presensiGuru::where("presensi", "Tugas")->count(),
-            "guruSakit" => presensiGuru::where("presensi", "Sakit")->count(),
-            "guruAlfa" => presensiGuru::where("presensi", "Alfa")->count(),
-            "guruIzin" => presensiGuru::where("presensi", "Izin")->count(),
-            "presensiGuru" => presensiGuru::all(),
-            "pklHadir" => PresensiPKLModel::where("presensi", "Hadir")->count(),
-            "pklTugas" => PresensiPKLModel::where("presensi", "Tugas")->count(),
-            "pklSakit" => PresensiPKLModel::where("presensi", "Sakit")->count(),
-            "pklAlfa" => PresensiPKLModel::where("presensi", "Alfa")->count(),
-            "pklIzin" => PresensiPKLModel::where("presensi", "Izin")->count(),
-            "presensipkl" => PresensiPKLModel::all(),
+            "guruHadir" => presensiGuru::where([
+                "presensi" => "Hadir",
+                "tanggal" => date("d/m/Y")
+            ])->count(),
+            "guruTugas" => presensiGuru::where([
+                "presensi" => "Tugas",
+                "tanggal" => date("d/m/Y")
+            ])->count(),
+            "guruSakit" => presensiGuru::where([
+                "presensi" => "Sakit",
+                "tanggal" => date("d/m/Y")
+            ])->count(),
+            "guruAlfa" => presensiGuru::where([
+                "presensi" => "Alfa",
+                "tanggal" => date("d/m/Y")
+            ])->count(),
+            "guruIzin" => presensiGuru::where([
+                "presensi" => "Izin",
+                "tanggal" => date("d/m/Y")
+            ])->count(),
+            "presensiGuru" => presensiGuru::where("tanggal", date("d/m/Y")),
+            "pklHadir" => PresensiPKLModel::where([
+                "presensi" => "Hadir",
+                "tanggal" => date("d/m/Y")
+            ])->count(),
+            "pklTugas" => PresensiPKLModel::where([
+                "presensi" => "Tugas",
+                "tanggal" => date("d/m/Y")
+            ])->count(),
+            "pklSakit" => PresensiPKLModel::where([
+                "presensi" => "Sakit",
+                "tanggal" => date("d/m/Y")
+            ])->count(),
+            "pklAlfa" => PresensiPKLModel::where([
+                "presensi" => "Alfa",
+                "tanggal" => date("d/m/Y")
+            ])->count(),
+            "pklIzin" => PresensiPKLModel::where([
+                "presensi" => "Izin",
+                "tanggal" => date("d/m/Y")
+            ])->count(),
+            "presensipkl" => PresensiPKLModel::where("tanggal", date("d/m/Y")),
         ]);
     }
 
