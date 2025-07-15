@@ -56,6 +56,7 @@
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="id" value="{{ $item->id }}">
+                            <span class="text-muted font-13">{{ $item->tanggal }} :</span>
                             <select class="form-select mt-3 mx-2" id="Presensi" name="presensi">
                                 <option {{ $item->presensi == 'Hadir' ? 'selected' : '' }}>Hadir
                                 </option>
