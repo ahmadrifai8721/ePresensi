@@ -19,11 +19,11 @@
                 </div>
                 <h5 class="font-14 my-1 fw-normal">Jumlah Siswa Yang Absen Hari
                     {{ $date }}:
-                    {{ $presensi->count() }}
+                    {{ $presensis->count() }}
                 </h5>
             </td>
-            {{-- @dump($presensi) --}}
-            @forelse ($presensi as $item)
+            {{-- @dump($presensis) --}}
+            @forelse ($presensis as $item)
                 <tr>
                     <td>
                         <h5 class="font-14 my-1 fw-normal">Nama</h5>

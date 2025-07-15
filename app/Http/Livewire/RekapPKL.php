@@ -14,12 +14,12 @@ class RekapPKL extends Component
     public $date;
     public $tempatSelect;
     public $tempat;
-    public $presensi = [];
+    public $presensis = [];
 
     public function mount()
     {
         $presensi = PresensiPKLModel::where('tanggal', $this->date);
-        $this->presensi = $presensi->get();
+        $this->presensis = $presensi->get();
         $this->tempat = tempatPKL::all();
     }
     public function render()
@@ -30,7 +30,7 @@ class RekapPKL extends Component
     {
         $this->date = \Carbon\Carbon::parse($this->date)->format('d/m/Y');
         $presensi = PresensiPKLModel::where('tanggal', $this->date);
-        $this->presensi = $presensi->get();
+        $this->presensis = $presensi->get();
         $this->tempatSelect = 0;
     }
     public function findTempat()
@@ -47,12 +47,12 @@ class RekapPKL extends Component
                 'tempat_p_k_l_id' => $this->tempatSelect,
                 'tanggal' => $this->date
             ]);
-            $this->presensi = $presensi->get();
+            $this->presensis = $presensi->get();
         } else {
             $presensi = PresensiPKLModel::where([
                 'tanggal' => $this->date
             ]);
-            $this->presensi = $presensi->get();
+            $this->presensis = $presensi->get();
         }
     }
 }
