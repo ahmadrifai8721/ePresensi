@@ -7,11 +7,22 @@
                         wire:model='date' wire:change='findDate'>
                     <label for="tanggal">Tanggal</label>
                 </div>
+                <div class="form-floating mb-3">
+                    <select name="tempat" id="tempat" class="form-select" wire:model='tempatSelect'
+                        wire:change='findTempat'>
+                        <option value="0">-- Pilih Tempat --</option>
+                        @foreach ($tempat as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                        @endforeach
+                    </select>
+                    <label for="tempat">Tempat</label>
+                </div>
                 <h5 class="font-14 my-1 fw-normal">Jumlah Siswa Yang Absen Hari
                     {{ $date }}:
                     {{ $presensi->count() }}
                 </h5>
             </td>
+            {{-- @dump($presensi) --}}
             @forelse ($presensi as $item)
                 <tr>
                     <td>
@@ -76,6 +87,8 @@
                     </td>
                 </tr>
             @endforelse
+
         </tbody>
     </table> {{-- In work, do what you enjoy. --}}
+
 </div>

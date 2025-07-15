@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\presensi;
 use App\Models\PresensiPKLModel;
+use App\Models\tempatPKL;
 use Livewire\Component;
 
 
@@ -11,12 +12,15 @@ use Livewire\Component;
 class RekapPKL extends Component
 {
     public $date;
+    public $tempatSelect;
+    public $tempat;
     public $presensi = [];
 
     public function mount()
     {
         $presensi = PresensiPKLModel::where('tanggal', $this->date);
         $this->presensi = $presensi->get();
+        $this->tempat = tempatPKL::all();
     }
     public function render()
     {
@@ -27,5 +31,28 @@ class RekapPKL extends Component
         $this->date = \Carbon\Carbon::parse($this->date)->format('d/m/Y');
         $presensi = PresensiPKLModel::where('tanggal', $this->date);
         $this->presensi = $presensi->get();
+        $this->tempatSelect = 0;
+    }
+    public function findTempat()
+    {
+        // dd(is_array(explode('/', $this->date)));
+        // dd($this->tempatSelect);
+        if (!is_array(explode('/', $this->date))) {
+            # code...
+            $this->date = \Carbon\Carbon::parse($this->date)->format('d/m/Y');
+        }
+        if ($this->tempatSelect > 0) {
+            # code...
+            $presensi = PresensiPKLModel::where([
+                'tempat_p_k_l_id' => $this->tempatSelect,
+                'tanggal' => $this->date
+            ]);
+            $this->presensi = $presensi->get();
+        } else {
+            $presensi = PresensiPKLModel::where([
+                'tanggal' => $this->date
+            ]);
+            $this->presensi = $presensi->get();
+        }
     }
 }
