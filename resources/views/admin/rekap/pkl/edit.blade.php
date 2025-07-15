@@ -45,7 +45,7 @@
                                             </h5>
                                         </td>
                                     </tr>
-
+ 
                                     @forelse ($presensi as $item)
                                         {{-- @dd($item) --}}
                                         <tr>

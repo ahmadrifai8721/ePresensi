@@ -44,7 +44,7 @@ class PresensiPKLController extends Controller
         } elseif ($request->file('presensi_file')->getSize() > 10 * 1024 * 1024) {
             return redirect()->back()->withErrors(['presensi_file' => 'Ukuran file maksimal 10 MB.']);
         } else {
-            $request->file('presensi_file')->storeAs('buktiPresensiPKL', $bukti, 'public');
+            $request->file('presensi_file')->storeAs('buktiPresensiPKL', Date("d/m/Y") . "_" . $request->siswa_id . "_" . $bukti, 'public');
         }
         // return $bukti;
         // return PresensiPKLModel::where(['bukti' => $bukti, 'siswa_id' => $request->siswa_id])->first();
@@ -52,7 +52,7 @@ class PresensiPKLController extends Controller
             'siswa_id' => $request->siswa_id,
             'tempat_p_k_l_id' => $request->tempat_p_k_l_id,
             'presensi' => $request->presensi,
-            'bukti' => $bukti,
+            'bukti' => Date("d/m/Y") . "_" . $request->siswa_id . "_" . $bukti,
             'tanggal' => date("d/m/Y"),
         ]);
         return redirect()->back()->with('sudah', 'Presensi PKL Berhasil Di Simpan');
