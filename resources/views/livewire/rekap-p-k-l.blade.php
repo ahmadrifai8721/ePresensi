@@ -1,5 +1,5 @@
 <div>
-    <table class="table table-centered table-nowrap table-hover mb-0" wire:ignore.self>
+    <table class="table table-centered table-nowrap table-hover mb-0">
         <tbody>
             <td colspan="4">
                 <div class="form-floating mb-3">
