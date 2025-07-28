@@ -12,47 +12,86 @@ use Livewire\Component;
 class RekapPKL extends Component
 {
     public $date;
+    public $dateSelect;
     public $tempatSelect;
     public $tempat;
-    public $presensis = [];
+    public $check;
+    public $presensis;
 
     public function mount()
     {
         $presensi = PresensiPKLModel::where('tanggal', $this->date);
         $this->presensis = $presensi->get();
         $this->tempat = tempatPKL::all();
-    }
-    public function render()
-    {
-        return view('livewire.rekap-p-k-l');
+        $this->dateSelect = $this->date;
     }
     public function findDate()
     {
-        $this->date = \Carbon\Carbon::parse($this->date)->format('d/m/Y');
-        $presensi = PresensiPKLModel::where('tanggal', $this->date);
-        $this->presensis = $presensi->get();
-        $this->tempatSelect = 0;
+        // dd(is_array(explode('/', $this->date)));
+        //     dd($this->tempatSelect);
+        $this->dateSelect = \Carbon\Carbon::parse($this->dateSelect)->format('d/m/Y');
+        if ($this->tempatSelect > 0) {
+            # code...
+            $presensi = PresensiPKLModel::where([
+                'tempat_p_k_l_id' => $this->tempatSelect,
+                'tanggal' => $this->dateSelect
+            ]);
+            $this->presensis = $presensi->get();
+        } else {
+            $presensi = PresensiPKLModel::where(
+                'tanggal',
+                $this->dateSelect
+            );
+            $this->presensis = $presensi->get();
+            // dd($presensi->get());
+        }
     }
     public function findTempat()
     {
-        // dd(is_array(explode('/', $this->date)));
+        // dd(is_array(explode('/', $this->dateSelect)));
         // dd($this->tempatSelect);
-        if (!is_array(explode('/', $this->date))) {
+        if (!is_array(explode('/', $this->dateSelect))) {
             # code...
-            $this->date = \Carbon\Carbon::parse($this->date)->format('d/m/Y');
+            $this->dateSelect = \Carbon\Carbon::parse($this->dateSelect)->format('d/m/Y');
         }
         if ($this->tempatSelect > 0) {
             # code...
             $presensi = PresensiPKLModel::where([
                 'tempat_p_k_l_id' => $this->tempatSelect,
-                'tanggal' => $this->date
+                'tanggal' => $this->dateSelect
             ]);
             $this->presensis = $presensi->get();
         } else {
             $presensi = PresensiPKLModel::where([
-                'tanggal' => $this->date
+                'tanggal' => $this->dateSelect
             ]);
             $this->presensis = $presensi->get();
         }
+    }
+    public function updating($view, $data)
+    {
+        $this->check = true;
+        // dump($this->dateSelect);
+        // Runs BEFORE the provided view is rendered...
+        //
+        // $view: The view about to be rendered
+        // $data: The data provided to the view
+    }
+    public function updated($view, $data)
+    {
+        $this->check = false;
+        // dump($this->dateSelect);
+        // $this->presensis =  $presensi = PresensiPKLModel::where([
+        //     'tempat_p_k_l_id' => $this->tempatSelect,
+        //     'tanggal' => $this->dateSelect
+        // ]);
+        // Runs BEFORE the provided view is rendered...
+        //
+        // $view: The view about to be rendered
+        // $data: The data provided to the view
+    }
+    public function render()
+    {
+        return view('livewire.rekap-p-k-l');
     }
 }

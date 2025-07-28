@@ -1,14 +1,18 @@
 <div>
+
+    <div wire:loading>
+        <span class="h4 text-center w-100">Load Data</span>
+    </div>
     <table class="table table-centered table-nowrap table-hover mb-0">
         <tbody>
             <td colspan="4">
                 <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="tanggal" name="tanggal" placeholder="Tanggal"
-                        wire:model='date' wire:change='findDate'>
+                    <input type="date" class="form-control" id="dateSelect" name="dateSelect" placeholder="Tanggal"
+                        wire:model.live='dateSelect' wire:change='findDate'>
                     <label for="tanggal">Tanggal</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <select name="tempat" id="tempat" class="form-select" wire:model='tempatSelect'
+                    <select name="tempat" id="tempat" class="form-select" wire:model.live='tempatSelect'
                         wire:change='findTempat'>
                         <option value="0">-- Pilih Tempat --</option>
                         @foreach ($tempat as $item)
@@ -22,7 +26,7 @@
                     {{ $presensis->count() }}
                 </h5>
             </td>
-            {{-- @dump($presensis) --}}
+
             @forelse ($presensis as $item)
                 <tr>
                     <td>

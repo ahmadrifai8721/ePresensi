@@ -71,7 +71,7 @@ class Dashboard extends Controller
                 "presensi" => "Izin",
                 "tanggal" => date("d/m/Y")
             ])->count(),
-            "presensipkl" => PresensiPKLModel::where("tanggal", date("d/m/Y")),
+            "presensipkl" => PresensiPKLModel::where("tanggal", date("d/m/Y"))->get(),
         ]);
     }
 
